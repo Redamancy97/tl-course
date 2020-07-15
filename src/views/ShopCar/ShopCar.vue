@@ -87,7 +87,6 @@
             },
         },
         methods: {
-
             handleCheckAllChange(val) {
                 if (val) {
                     // 全选操作
@@ -109,8 +108,11 @@
                         message: '该课程已删除 ...',
                         type: 'warning'
                     });
+
+                    this.$store.dispatch("checkShopCar");
                     goodsList().then(res => {
                         console.log(res)
+                        this.$store.commit("changeShopNumber", {total: res.data.shoppingCartList})
                         this.list = res.data.shoppingCartList.map(item => {
                             return {
                                 ...item,
@@ -118,7 +120,6 @@
                                 checked: false
                             }
                         })
-
                     })
                 })
             },
@@ -129,6 +130,7 @@
             // console.log(shopCar.courseId)
             goodsList().then(res => {
                 console.log(res)
+                this.$store.commit("changeShopNumber", {total: res.data.shoppingCartList})
                 this.list = res.data.shoppingCartList.map(item => {
                     return {
                         ...item,

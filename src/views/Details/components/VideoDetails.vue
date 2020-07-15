@@ -60,22 +60,17 @@
 </script>
 
 <style scoped lang="less">
-    /*.clearfix:after {*/
-    /*    Content: "";*/
-    /*    Height: 0;*/
-    /*    display: block;*/
-    /*    clear: both;*/
-    /*}*/
-
     .video-details-container {
         width: 1200px;
         margin: 0 auto;
         background-color: #fff;
         overflow: hidden;
+        cursor: pointer;
 
         .play-view {
             width: 1100px;
             margin: 20px auto;
+
             .view-play {
                 float: left;
 
@@ -94,7 +89,8 @@
 
                 .section-detail-directory {
                     margin-left: 20px;
-                    h3{
+
+                    h3 {
                         margin: 10px auto;
                     }
 
@@ -105,6 +101,10 @@
                             .pageword {
                                 font-size: 14px;
                                 margin-left: 60px;
+                            }
+
+                            .pageword:hover {
+                                color: #00cf8c;
                             }
 
                             .recorded {

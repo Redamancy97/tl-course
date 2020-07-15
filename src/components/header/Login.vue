@@ -5,16 +5,21 @@
                 <span>
                     <router-link to="/shop">
                         <i class="el-icon-shopping-cart-2" @click="toclick"></i>
+                        <span>{{getTotalNumber}}</span>
                     </router-link>
                 </span>
             </a>
             <span class="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             <div class="login">
-                <span class="login-text" @click="showLoginModel" v-if="!isLogin">登录/注册</span>
-                <span v-else @click="logout">{{userInfo.nickname}}</span>
-                <span class="user">
+                <span class="login-text" @click="showLoginModel" v-if="!isLogin">登录/注册<span class="user">
                     <i class="el-icon-user-solid"></i>
+                </span></span>
+                <span v-else @click="logout"><span>
+                    {{userInfo.nickname}}
                 </span>
+                    <img :src="userInfo.avatarUrl"
+                         style="width: 30px;height: 30px;border-radius: 50%"></span>
+
             </div>
         </div>
         <!--        <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>-->
@@ -46,7 +51,7 @@
 </template>
 
 <script>
-    import {mapState} from "vuex";
+    import {mapGetters, mapState} from "vuex";
     import {loginApi, logout} from "../../api/user-api";
     import loginMixin from "../../mixin/loginMixin";
     // import {createKey, setItem} from "../../utils/localstore";
@@ -88,8 +93,8 @@
         }
         ,
         computed: {
-            ...
-                mapState(["loginModelVisible", "isLogin", "userInfo"])
+            ...mapState(["loginModelVisible", "isLogin", "userInfo"]),
+            ...mapGetters(["getTotalNumber"])
         }
         ,
         methods: {
@@ -141,8 +146,8 @@
                     }
                 })
             },
-            toclick(){
-                if(this.loginClick()){
+            toclick() {
+                if (this.loginClick()) {
                     console.log("可以进入购物车")
                 }
             }
@@ -152,7 +157,8 @@
 
 <style scoped lang="less">
     .login-container {
-        height: 100%;
+        height: 30px;
+        line-height: 30px;
         font-size: 14px;
         padding: 32px 0 0;
 
@@ -161,7 +167,7 @@
         }
 
         .login-box {
-            line-height: 32px;
+            /*line-height: 32px;*/
 
             .shopping {
                 line-height: 35px;
@@ -201,6 +207,7 @@
             }
 
             .login {
+
                 float: right;
                 cursor: pointer;
 

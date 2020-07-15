@@ -48,7 +48,8 @@ const routes = [
                 // name: 'Index',
                 component: VideoDetails,
                 meta: {
-                    title: "视频详情"
+                    title: "视频详情",
+                    isAuth: true
                 }
             }]
         }]
@@ -82,7 +83,7 @@ router.beforeEach((to, from, next) => {
     if (to.meta.isAuth) {
         //需要鉴权的
         loginPromise.then(() => {
-            if (store.state.isLogin1) {
+            if (store.state.isLogin) {
                 next()
             } else {
                 store.commit("changeLoginModelVisible", {isShow: true})

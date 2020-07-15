@@ -62,6 +62,7 @@
             }
 
             .login {
+
                 float: right;
                 margin-right: 100px;
             }

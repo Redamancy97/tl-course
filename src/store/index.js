@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {getUserInfo} from "../api/user-api";
+import {goodsList} from "../api/tl-course-api";
 
 Vue.use(Vuex)
 
@@ -8,7 +9,8 @@ export default new Vuex.Store({
     state: {
         loginModelVisible: false,
         isLogin: false,
-        userInfo: {}
+        userInfo: {},
+        total: []
     },
     mutations: {
         changeLoginModelVisible(state, {isShow}) {
@@ -19,6 +21,9 @@ export default new Vuex.Store({
         },
         changeUserInfo(state, {userInfo}) {
             state.userInfo = userInfo;
+        },
+        changeShopNumber(state, payload) {
+            state.total = payload.total;
         }
     },
     actions: {
@@ -35,6 +40,16 @@ export default new Vuex.Store({
 
             })
         },
+        checkShopCar(context){
+            return goodsList().then(res=>{
+                context.commit("changeShopNumber", {total: res.data.shoppingCartList})
+            })
+        }
+    },
+    getters: {
+        getTotalNumber: state => {
+            return state.total.length
+        }
     },
     modules: {}
 })
